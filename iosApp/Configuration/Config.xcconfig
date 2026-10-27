@@ -1,0 +1,7 @@
+TEAM_ID=
+
+PRODUCT_NAME=AgroCampo_Gutierrez
+PRODUCT_BUNDLE_IDENTIFIER=pe.edu.upeu.agrosierra_gutierrez.AgroCampo_Gutierrez$(TEAM_ID)
+
+CURRENT_PROJECT_VERSION=1
+MARKETING_VERSION=1.0
