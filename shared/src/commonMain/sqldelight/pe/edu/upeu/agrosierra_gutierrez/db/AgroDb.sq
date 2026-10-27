@@ -1,0 +1,42 @@
+CREATE TABLE lote (
+ propietario TEXT NOT NULL, id INTEGER NOT NULL, codigo TEXT NOT NULL, nombre TEXT NOT NULL,
+ hectareas REAL NOT NULL, cultivo TEXT NOT NULL, valle TEXT NOT NULL, campaniaCerrada INTEGER NOT NULL,
+ dosisMaxima REAL NOT NULL, PRIMARY KEY(propietario,id)
+);
+CREATE TABLE labor (
+ propietario TEXT NOT NULL, id INTEGER NOT NULL, loteId INTEGER NOT NULL, tipo TEXT NOT NULL,
+ fecha TEXT NOT NULL, responsable TEXT NOT NULL, cantidad REAL NOT NULL, observacion TEXT NOT NULL,
+ pendiente INTEGER NOT NULL, autorId INTEGER NOT NULL, registradoEn TEXT NOT NULL,
+ operacion TEXT NOT NULL DEFAULT '', clienteId TEXT NOT NULL DEFAULT '', error TEXT NOT NULL DEFAULT '',
+ PRIMARY KEY(propietario,id)
+);
+CREATE TABLE sincronizacion (propietario TEXT NOT NULL PRIMARY KEY, instante INTEGER NOT NULL);
+
+observarLotes:
+SELECT * FROM lote WHERE propietario = :propietario
+AND (:valle = '' OR valle = :valle)
+AND (nombre LIKE '%' || :busqueda || '%' OR codigo LIKE '%' || :busqueda || '%') ORDER BY codigo;
+todosLotes:
+SELECT * FROM lote WHERE propietario = ? ORDER BY id;
+observarLaboresPorLote:
+SELECT * FROM labor WHERE propietario = ? AND loteId = ? AND operacion != 'DELETE' ORDER BY fecha DESC, id DESC;
+pendientes:
+SELECT * FROM labor WHERE propietario = ? AND pendiente = 1 ORDER BY id DESC;
+porId:
+SELECT * FROM labor WHERE propietario = ? AND id = ?;
+siguienteIdLocal:
+SELECT COALESCE(MIN(id), 0) FROM labor WHERE propietario = ?;
+guardarLote:
+INSERT OR REPLACE INTO lote VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
+guardarLabor:
+INSERT OR REPLACE INTO labor VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+borrarLabor:
+DELETE FROM labor WHERE propietario = ? AND id = ?;
+borrarConfirmadasLote:
+DELETE FROM labor WHERE propietario = ? AND loteId = ? AND pendiente = 0;
+marcarError:
+UPDATE labor SET error = ? WHERE propietario = ? AND id = ?;
+ultimaSync:
+SELECT instante FROM sincronizacion WHERE propietario = ?;
+guardarSync:
+INSERT OR REPLACE INTO sincronizacion VALUES (?, ?);
