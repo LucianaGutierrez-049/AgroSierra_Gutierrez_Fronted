@@ -59,3 +59,7 @@ La rama de cambio SC se crea al recibir la asignación del docente.
 ## Repositorio
 
 https://github.com/LucianaGutierrez-049/AgroSierra_Gutierrez_Fronted.git
+
+## Cierre de entrega
+
+[Verificación y evidencias finales](docs/CIERRE_UNIDAD2.md).
