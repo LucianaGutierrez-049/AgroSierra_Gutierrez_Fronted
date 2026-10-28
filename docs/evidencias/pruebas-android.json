@@ -1,0 +1,32 @@
+[
+  {
+    "name": "pe.edu.upeu.agrosierra_gutierrez.AgroOfflineTest",
+    "tests": "7",
+    "skipped": "0",
+    "failures": "0",
+    "errors": "0",
+    "timestamp": "2026-10-28T01:01:59.868Z",
+    "hostname": "LUCIANA",
+    "time": "3.552"
+  },
+  {
+    "name": "pe.edu.upeu.agrosierra_gutierrez.SharedCommonTest",
+    "tests": "1",
+    "skipped": "0",
+    "failures": "0",
+    "errors": "0",
+    "timestamp": "2026-10-28T01:02:03.435Z",
+    "hostname": "LUCIANA",
+    "time": "0.002"
+  },
+  {
+    "name": "pe.edu.upeu.agrosierra_gutierrez.SharedLogicAndroidHostTest",
+    "tests": "1",
+    "skipped": "0",
+    "failures": "0",
+    "errors": "0",
+    "timestamp": "2026-10-28T01:02:03.444Z",
+    "hostname": "LUCIANA",
+    "time": "0.001"
+  }
+]
