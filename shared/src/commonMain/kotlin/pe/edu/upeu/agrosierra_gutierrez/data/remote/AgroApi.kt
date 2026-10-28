@@ -23,7 +23,7 @@ class AgroApi(private val client: HttpClient,private val sesion: SesionManager) 
         catch(e: CancellationException) { throw e }
         catch(e: HttpRequestTimeoutException) { throw ErrorApi.TiempoAgotado() }
         catch(e: SerializationException) { throw ErrorApi.Servidor() }
-        catch(e: Exception) { throw ErrorApi.SinConexion() }
+        catch(e: Exception) { println("AgroCampo conexion: ${e::class.simpleName}: ${e.message}"); throw ErrorApi.SinConexion() }
         if(response.status.value !in 200..299) {
             val error=runCatching { response.body<ErrorDto>() }.getOrDefault(ErrorDto())
             if(response.status.value==401 && !login) sesion.cerrar()
